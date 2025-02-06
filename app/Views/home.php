@@ -132,12 +132,12 @@
                         </div>
                     </div>
                 </div>
-                <div class="mt-6">
+                <!-- <div class="mt-6">
                     <h2 id="alarm-title-heading" class="font-semibold text-xl mb-3">Alarm name</h2>
                     <div class="columns-1">
                         <input type="text" class="w-full p-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"/>
                     </div>
-                </div>
+                </div> -->
                 <div class="mt-6 flex flex-wrap justify-center gap-4">
                     <button onclick="calculateTime()" class="block w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                         Set an alarm
@@ -147,6 +147,22 @@
         </div>
     </body>
 </html>
+
+<div id="quizModal" class="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50 hidden">
+    <div class="bg-white p-6 rounded-lg w-96 shadow-md">
+        <h2 id="question" class="text-lg font-bold mb-4">Loading...</h2>
+
+        <input id="answerInput" type="number" placeholder="Enter your answer" class="w-full p-2 border border-gray-300 rounded mb-4" />
+        
+        <div class="flex justify-end">
+            <button id="submitAnswer" class="mr-2 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700">
+                Submit
+            </button>
+        </div>
+
+        <p id="result" class="mt-4 text-center text-lg"></p>
+    </div>
+</div>
 
 <script>
     function updateTime() {
@@ -319,10 +335,40 @@
     }
 
     function loopAlarm() {
+        showQuiz();
         loopAudioPlayer.play();
 
         loopAudioPlayer.addEventListener('ended', () => {
             loopAudioPlayer.play();
         });
+    }
+
+    function showQuiz() {
+        const modal = document.getElementById("quizModal");
+        modal.classList.remove("hidden");
+
+        fetch('assets/questions.json')
+        .then(response => response.json())
+        .then(data => {
+            const questions = data.questions;
+            const randomQuestion = questions[Math.floor(Math.random() * questions.length)];
+
+            document.getElementById('question').textContent = randomQuestion.question;
+
+            document.getElementById('submitAnswer').addEventListener('click', () => {
+                const userAnswer = parseInt(document.getElementById('answerInput').value);
+                const resultElement = document.getElementById('result');
+
+                if (userAnswer === randomQuestion.answer) {
+                    modal.classList.add("hidden");
+                    stopAlarm();
+                } else {
+                    resultElement.textContent = "Wrong answer. Try again!";
+                    resultElement.classList.add("text-red-500");
+                    resultElement.classList.remove("text-green-500");
+                }
+            });
+        })
+        .catch(error => console.error('Error loading JSON:', error));
     }
 </script>
