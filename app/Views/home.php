@@ -264,6 +264,10 @@
         start.setHours(parseInt(startParts[0]), parseInt(startParts[1]), parseInt(startParts[2]));
         end.setHours(parseInt(endParts[0]), parseInt(endParts[1]), parseInt(endParts[2]));
 
+        if (end <= start) {
+            end.setDate(end.getDate() + 1);
+        }
+
         countdownInterval = setInterval(updateCountdown, 1000);
         totalTime = Math.floor((end - start) / 1000);
         timeLeft = totalTime;
