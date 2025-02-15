@@ -14,7 +14,48 @@ If you don't have the project, clone it from the GitHub repository:
 https://github.com/rrtutors/AdvanceAlarmaManager.git
 ```
 
-### 2. Run the Local Server
+### 2. Install Dependencies
+Navigate to your project folder and install dependencies using Composer:
+
+```bash
+composer install
+```
+
+### 3. If you get an error
+```bash
+'composer' is not recognized as an internal or external command,
+operable program or batch file.
+```
+This error occurs because the system cannot find the composer command. This is usually caused by:
+
+1. Composer is not installed.
+2. The Composer path is not added to Environment Variables.
+
+### 4. Ensure Composer is Installed
+
+If Composer is not installed, follow these steps:
+
+1. Download Composer from https://getcomposer.org
+2. Install Composer by following the instructions in the installer
+3. Find the Composer installation location.
+    - It is usually located at: **C:\ProgramData\ComposerSetup\bin** or **C:\Users\USERNAME\AppData\Roaming\Composer\vendor\bin**
+    - You can also search for the `composer.phar` file on your computer.
+4. Add this location to Environment Variables:
+    - Open Control Panel → System → Advanced system settings.
+    - Click **Environment Variables**.
+    - In the **System Variables** section, find `Path` and click Edit.
+    - Click New, then add the path to the Composer location.
+    - Click OK, then restart Command Prompt.
+
+Once the installation is complete, try running the following command in Command Prompt:
+
+``` bash
+composer -V
+```
+
+If Composer is detected, the installed version will be displayed. Run `composer install` again to ensure all dependencies are properly set up
+
+### 5. Run the Local Server
 
 Open a terminal and navigate to your project folder, then run the following command to start the local server
 
@@ -24,18 +65,18 @@ php spark serve
 
 This command will run the application on http://localhost:8080 by default.
 
-### 3. Access the Application
+### 6. Access the Application
 
 Open your browser and go to http://localhost:8080 to view the CodeIgniter 4 application running locally.
 
-### 4. If you get an error
+### 7. If you get an error
 ```bash
 'php' is not recognized as an internal or external command,
 operable program or batch file.
 ```
 This happens because Windows cannot find the PHP executable (php.exe) in its system PATH.
 
-### 5. Add PHP to Environment Variables
+### 8. Add PHP to Environment Variables
 1. Open System Properties:
    - Press `Win + R`, type `sysdm.cpl`, and hit `Enter`.
    - Go to the **Advanced** tab and click on **Environment Variables**.
