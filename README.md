@@ -74,7 +74,8 @@ This happens because Windows cannot find the PHP executable (php.exe) in its sys
 
 ### 7. Add PHP to Environment Variables
 1. Open System Properties:
-   - Press `Win + R`, type `sysdm.cpl`, and hit `Enter`.
+   - Open Control Panel → System → Advanced system settings.
+   - Click **Environment Variables**.
    - Go to the **Advanced** tab and click on **Environment Variables**.
 
 2. Edit the PATH variable:
@@ -82,6 +83,7 @@ This happens because Windows cannot find the PHP executable (php.exe) in its sys
    - Select it and click **Edit**.
    - Click **New**, then add your PHP installation path (e.g., `C:\xampp\php\`).
    - Click **OK** to save the changes.
+
 3. Restart terminal and try again `php spark serve`
 
 ### 8. Access the Application
