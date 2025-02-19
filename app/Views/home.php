@@ -165,6 +165,26 @@
 </div>
 
 <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const now = new Date();
+        let currentHour = now.getHours().toString().padStart(2, '0');
+        let currentMinute = now.getMinutes() + 1;
+
+        if (currentMinute === 60) {
+            currentMinute = 0;
+            currentHour = (parseInt(currentHour) + 1).toString().padStart(2, '0');
+            
+            if (currentHour === "24") {
+                currentHour = "00";
+            }
+        }
+
+        currentMinute = currentMinute.toString().padStart(2, '0');
+
+        document.getElementById("hours").value = currentHour;
+        document.getElementById("minutes").value = currentMinute;
+    });
+
     function updateTime() {
         const now = new Date();
 
@@ -358,8 +378,16 @@
             const randomQuestion = questions[Math.floor(Math.random() * questions.length)];
 
             document.getElementById('question').textContent = randomQuestion.question;
+            document.getElementById('result').textContent = '';
+            document.getElementById('answerInput').value = '';
 
-            document.getElementById('submitAnswer').addEventListener('click', () => {
+            const submitButton = document.getElementById('submitAnswer');
+
+            // Delete old event listener
+            submitButton.replaceWith(submitButton.cloneNode(true));
+            const newSubmitButton = document.getElementById('submitAnswer');
+
+            newSubmitButton.addEventListener('click', () => {
                 const userAnswer = parseInt(document.getElementById('answerInput').value);
                 const resultElement = document.getElementById('result');
 
