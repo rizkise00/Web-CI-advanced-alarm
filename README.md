@@ -11,7 +11,7 @@ Before starting, make sure you have **PHP** (version 7.4 or higher) installed on
 If you don't have the project, clone it from the GitHub repository:
 
 ```bash
-https://github.com/rrtutors/AdvanceAlarmaManager.git
+https://github.com/rizkise00/Web-CI-advanced-alarm.git
 ```
 
 ### 2. Install Dependencies
